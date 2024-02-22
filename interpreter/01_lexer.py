@@ -13,6 +13,8 @@ class TokenType:
     EOF = "EOF"  # Означає кінець вхідного рядка
     MUL = "MUL"
     DIV = "DIV"
+    LPAREN = "LPAREN"  # Відкривають дужкову частину виразу
+    RPAREN = "RPAREN"  # Закривають дужкову частину виразу
 
 
 class Token:
@@ -76,6 +78,14 @@ class Lexer:
             if self.current_char == "/":
                 self.advance()
                 return Token(TokenType.DIV, "/")
+
+            if self.current_char == "(":
+                self.advance()
+                return Token(TokenType.LPAREN, "(")
+
+            if self.current_char == ")":
+                self.advance()
+                return Token(TokenType.RPAREN, ")")
 
             raise LexicalError("Помилка лексичного аналізу")
 
