@@ -11,6 +11,8 @@ class TokenType:
     PLUS = "PLUS"
     MINUS = "MINUS"
     EOF = "EOF"  # Означає кінець вхідного рядка
+    MUL = "MUL"
+    DIV = "DIV"
 
 
 class Token:
@@ -66,6 +68,14 @@ class Lexer:
             if self.current_char == "-":
                 self.advance()
                 return Token(TokenType.MINUS, "-")
+
+            if self.current_char == "*":
+                self.advance()
+                return Token(TokenType.MUL, "*")
+
+            if self.current_char == "/":
+                self.advance()
+                return Token(TokenType.DIV, "/")
 
             raise LexicalError("Помилка лексичного аналізу")
 
